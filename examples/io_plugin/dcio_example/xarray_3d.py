@@ -94,7 +94,10 @@ class XArrayDataSource3D(object):
 
         @property
         def crs(self) -> geometry.CRS:
-            return self.da.crs
+            try:
+                return self.da.crs
+            except AttributeError:
+                return self.da.geobox.crs
 
         @property
         def transform(self) -> Affine:
